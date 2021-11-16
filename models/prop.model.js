@@ -4,6 +4,22 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             primaryKey: true
         },
+        question: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        yesAlias: {
+            type: DataTypes.STRING,
+            defaultValue: 'Yes'
+        },
+        noAlias: {
+            type: DataTypes.STRING,
+            defaultValue: 'No'
+        },
+        openUntil: {
+            type: DataTypes.DATE,
+            allowNull: false
+        },
         finished: {
             type: DataTypes.BOOLEAN,
             allowNull: false,
