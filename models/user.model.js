@@ -2,9 +2,7 @@ module.exports = (sequelize, DataTypes) => {
     return sequelize.define('User', {
         userId: {
             type: DataTypes.STRING,
-            primaryKey: true,
-            unique: true,
-            allowNull: false
+            primaryKey: true
         },
 
         lastLogin: DataTypes.DATE,
@@ -14,12 +12,12 @@ module.exports = (sequelize, DataTypes) => {
             defaultValue: 0
         },
 
-        coinCount: {
+        balance: {
             type: DataTypes.INTEGER,
             allowNull: false,
             defaultValue: 50
         }
     }, {
-        timestamp: false
+        timestamps: false
     });
 };

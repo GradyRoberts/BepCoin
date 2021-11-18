@@ -29,6 +29,6 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.BOOLEAN,
         }
     }, {
-        timestamp: false
+        timestamps: false
     });
 };
