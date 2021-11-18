@@ -1,3 +1,7 @@
+/*
+ * Register commands with Discord. Only needs to be ran once unless commands change
+ */
+
 const fs = require('fs');
 const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v9');
