@@ -1,8 +1,9 @@
 module.exports = (sequelize, DataTypes) => {
     return sequelize.define('Bet', {
         betId: {
-            type: DataTypes.STRING,
-            primaryKey: true
+            type: DataTypes.INTEGER,
+            primaryKey: true,
+            autoIncrement: true
         },
         prediction: {
             type: DataTypes.BOOLEAN,

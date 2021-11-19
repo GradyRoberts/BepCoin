@@ -16,17 +16,17 @@ const Prop = require('./models/prop.model')(sequelize, Sequelize.DataTypes);
 
 // Users can place multiple bets
 // Each bet is placed by one user
-Bet.belongsTo(User); // fk='UserUserId'
+Bet.belongsTo(User, { foreignKey: 'userId' });
 User.hasMany(Bet);
 
 // Props can contain multiple bets
 // Each bet applies to one prop
-Bet.belongsTo(Prop); // fk='PropPropId'
+Bet.belongsTo(Prop, { foreignKey: 'propId' });
 Prop.hasMany(Bet);
 
 // Users can create many props
 // Each prop is created by one user
-Prop.belongsTo(User); // fk='UserUserId'
+Prop.belongsTo(User, { foreignKey: 'userId' });
 User.hasMany(Prop);
 
 sequelize.sync({ force: true }).catch(console.error);

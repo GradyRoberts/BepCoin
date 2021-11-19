@@ -1,8 +1,9 @@
 module.exports = (sequelize, DataTypes) => {
     return sequelize.define('Prop', {
         propId: {
-            type: DataTypes.STRING,
-            primaryKey: true
+            type: DataTypes.INTEGER,
+            primaryKey: true,
+            autoIncrement: true
         },
         question: {
             type: DataTypes.STRING,
