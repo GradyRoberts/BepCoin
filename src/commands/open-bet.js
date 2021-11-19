@@ -30,6 +30,7 @@ module.exports = {
         // const yesAlias = interaction.options.getString('custom_yes') || 'Yes';
         // const noAlias = interaction.options.getString('custom_no') || 'No';
         const timeLimit = interaction.options.getNumber('time_limit');
+        const closingTime = new Date(Date.now() + timeLimit * 1000);
 
         const [user, _created] = await User.findOrCreate({ where: { userId: uid } });
 
@@ -37,9 +38,14 @@ module.exports = {
             question: question,
             // yesAlias: yesAlias,
             // noAlias: noAlias,
-            openUntil: new Date(Date.now() + timeLimit * 1000)
+            openUntil: closingTime
         });
 
-        await interaction.reply('Pong!');
+        await interaction.reply(`
+            New bet created: ${question}\n
+            Accepting predictions until ${closingTime.getHours()}:${closingTime.getMinutes()}\n\n
+            Use \`/place-bet ${prop.propId} [yes/no]\` to wager your BepCoin!\n
+            ${uname}, use \`/close-bet ${prop.propId} [yes/no]\` to close the bet and pay out the winners!
+        `);
     },
 };
