@@ -12,17 +12,17 @@ const client = new Client({
 
 // Read command files dynamically
 client.commands = new Collection();
-const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+const commandFiles = fs.readdirSync('./src/commands').filter(file => file.endsWith('.js'));
 
 for (const file of commandFiles) {
-    const command = require(`./commands/${file}`);
+    const command = require(`./src/commands/${file}`);
     client.commands.set(command.data.name, command);
 };
 
 // Read event handlers dynamically
-const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
+const eventFiles = fs.readdirSync('./src/events').filter(file => file.endsWith('.js'));
 for (const file of eventFiles) {
-    const event = require(`./events/${file}`);
+    const event = require(`./src/events/${file}`);
     if (event.once) {
         client.once(event.name, (...args) => event.execute(...args));
     } else {
