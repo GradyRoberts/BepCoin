@@ -5,6 +5,7 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName('balance')
         .setDescription('View your Bepcoin balance and daily login streak!'),
+        
     async execute(interaction) {
         const uid = interaction.user.id;
         const uname = interaction.user.username;
