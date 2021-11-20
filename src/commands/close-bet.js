@@ -35,8 +35,6 @@ module.exports = {
         const loserCoins = await Bet.sum('wager', { where: { propId: propId, prediction: loser } });
         const winnerCoins = await Bet.sum('wager', { where: { propId: propId, prediction: winner } });
 
-        console.log(`Loser total: ${loserCoins}, Winner total: ${winnerCoins}`);
-
         const winningBets = await Bet.findAll({ where: { propId: propId, prediction: winner } });
         // Utilize transaction to ensure balance updates are done atomically for all bettors
         await sequelize.transaction(async (t) => {
@@ -45,11 +43,6 @@ module.exports = {
                 const wager = winningBets[i].wager;
                 const oldBalance = user.balance;
                 const newBalance = oldBalance + wager + Math.ceil((wager / winnerCoins) * loserCoins);
-                
-                console.log(`wager: ${wager}`);
-                console.log(`old balance: ${oldBalance}`);
-                console.log(`new balance: ${newBalance}`);
-                
                 await user.update({ balance: newBalance }, { transaction: t });
             }
         });
