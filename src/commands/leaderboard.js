@@ -12,10 +12,14 @@ module.exports = {
         
         const topUsers = [];
         for (let i = 0; i < topUsersRaw.length; i++) {
-            const user = await interaction.guild.members.fetch(topUsersRaw[i].userId);
-            const name = user.nickname || user.username;
-            const stack = topUsersRaw[i].balance;
-            topUsers.push([name, stack]);
+            try {
+                const user = await interaction.guild.members.fetch(topUsersRaw[i].userId);
+                const name = user.displayName;
+                const stack = topUsersRaw[i].balance;
+                topUsers.push([name, stack]);
+            } catch {
+                // user is from a different server
+            }
         }
 
         let response = '~ BepCoin Leaderboard ~';
