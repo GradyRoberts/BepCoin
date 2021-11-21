@@ -23,6 +23,13 @@ module.exports = {
             await interaction.reply({ content: `${uname}, this bet has been closed already`, ephemeral: true });
             return;
         }
+
+        const user = await User.findByPk(uid);
+        if (user.userId !== prop.userId) {
+            await interaction.reply({ content: `${uname}, you are not authorized to cancel this bet`, ephemeral: true });
+            return;
+        }
+
         await prop.update({ finished: true });
 
         const bets = await Bet.findAll({ where: { propId: propId } });
