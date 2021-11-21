@@ -48,6 +48,6 @@ module.exports = {
         });
 
         const winners_str = winner ? 'believers' : 'doubters';
-        await interaction.reply(`Bet "${prop.question}" has ended, **${winnerCoins + loserCoins} :coin:** go to **${winners_str}**!`);
+        await interaction.reply(`Bet **"${prop.question}"** has ended, **${winnerCoins + loserCoins} :coin:** go to **${winners_str}**!`);
     },
 };

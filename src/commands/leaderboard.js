@@ -20,6 +20,6 @@ module.exports = {
         //     response += `\n${topUsers[i][0]} - ${topUsers[i][1]}`;
         // }
         // await interaction.reply(response);
-        await interaction.reply('Currently unimplemented');
+        await interaction.reply({content: 'Currently unimplemented, sorry', ephemeral: true});
     },
 };

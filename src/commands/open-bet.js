@@ -12,7 +12,7 @@ module.exports = {
         .addNumberOption(option =>
             option.setName('time_limit')
                 .setDescription('How long to accept bets')
-                .addChoices([['1 min', 1], ['2 min', 2], ['5 min', 5]])
+                .addChoices([['1 min', 1], ['2 min', 2], ['5 min', 5], ['10 min', 10]])
                 .setRequired(true)),
     // .addStringOption(option =>
     //     option.setName('custom_yes')

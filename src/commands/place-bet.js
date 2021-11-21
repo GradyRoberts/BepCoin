@@ -42,6 +42,10 @@ module.exports = {
         }
 
         const [user, _created] = await User.findOrCreate({ where: { userId: uid } });
+        if (!Number.isInteger(amount)) {
+            await interaction.reply({ content: `${uname}, you must bet integer amounts of BepCoin`, ephemeral: true });
+            return;
+        }
         if (user.balance < amount) {
             await interaction.reply({ content: `${uname}, you do not have enough BepCoin to place this bet`, ephemeral: true });
             return;

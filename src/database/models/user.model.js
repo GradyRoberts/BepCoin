@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
         balance: {
             type: DataTypes.INTEGER,
             allowNull: false,
-            defaultValue: 50
+            defaultValue: 1000
         }
     }, {
         timestamps: false
