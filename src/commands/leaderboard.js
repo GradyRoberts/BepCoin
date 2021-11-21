@@ -7,7 +7,7 @@ module.exports = {
         .setDescription('See who has the biggest BepCoin stack!'),
 
     async execute(interaction) {
-        const topUsersRaw = await User.findAll({ order: [['balance', 'DESC']], limit: 5 });
+        const topUsersRaw = await User.findAll({ order: [['balance', 'DESC']], limit: 20 });
         
         const topUsers = [];
         for (let i = 0; i < topUsersRaw.length; i++) {
