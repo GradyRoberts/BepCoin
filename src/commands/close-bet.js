@@ -17,6 +17,7 @@ module.exports = {
                 .setRequired(true)),
 
     async execute(interaction) {
+        const uid = interaction.user.id;
         const propId = interaction.options.getString('bet_id');
         const winner = interaction.options.getNumber('winner');
         const loser = winner ? 0 : 1;
@@ -30,6 +31,13 @@ module.exports = {
             await interaction.reply({ content: `${uname}, this bet has been closed already`, ephemeral: true });
             return;
         }
+
+        const user = await User.findByPk(uid);
+        if (user.userId !== prop.userId) {
+            await interaction.reply({ content: `${uname}, you are not authorized to close this bet`, ephemeral: true });
+            return;
+        }
+
         await prop.update({ finished: true, outcome: winner });
 
         const loserCoins = await Bet.sum('wager', { where: { propId: propId, prediction: loser } });
