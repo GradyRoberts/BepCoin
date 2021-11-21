@@ -1,6 +1,5 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { User } = require('../database/db-objects');
-const sequelize = require('../database/db-connect');
 
 module.exports = {
     data: new SlashCommandBuilder()
