@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
-const { Prop } = require('../database/db-objects');
+const { Prop, Bet } = require('../database/db-objects');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -22,10 +22,13 @@ module.exports = {
 
         const question = prop.question;
         const isOpen = Date.parse(prop.openUntil) > new Date(Date.now()) ? `open, use \`/place-bet ${propId} [yes/no] [amount]\` to bet` : 'closed';
+
+        const believerCoins = await Bet.sum('wager', { where: { propId: propId, prediction: 1 } });
+        const doubterCoins = await Bet.sum('wager', { where: { propId: propId, prediction: 0 } });
         
         // #TODO: Add info about user's stake in the bet, if any
         await interaction.reply({ 
-            content: `"${question}"\nThis bet is currently ${isOpen}`,
+            content: `"**${question}**"\nBelievers: **${believerCoins}** :coin:\nDoubters: **${doubterCoins}** :coin:\n\nThis bet is currently ${isOpen}`,
             ephemeral: true
         });
     },
