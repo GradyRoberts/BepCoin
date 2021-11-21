@@ -47,8 +47,7 @@ module.exports = {
             return;
         }
         if (user.balance < amount) {
-            await interaction.reply({ content: `${uname}, you do not have enough BepCoin to place this bet`, ephemeral: true });
-            return;
+            amount = user.balance;
         }
         if (amount < 1) {
             await interaction.reply({ content: `${uname}, you must bet 1 or more BepCoin`, ephemeral: true });
