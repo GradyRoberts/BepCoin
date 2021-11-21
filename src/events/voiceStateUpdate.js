@@ -8,7 +8,15 @@ const isNewDay = (lastLogin, newLogin) => {
         && lastLogin.getMonth() == newLogin.getMonth()
         && lastLogin.getYear() == newLogin.getYear()
     );
-}
+};
+
+const isStreakBroken = (lastLogin, newLogin) => {
+    if (!lastLogin) { return true; }
+
+    const yesterday = new Date();
+    yesterday.setDate(newLogin.getDate()-1);
+    return (lastLogin.toLocaleDateString() !== yesterday.toLocaleDateString());
+};
 
 module.exports = {
     name: 'voiceStateUpdate',
@@ -23,7 +31,12 @@ module.exports = {
             const newLogin = new Date(Date.now());
             if (isNewDay(lastLogin, newLogin)) {
                 const oldStreak = user.loginStreak;
-                const newStreak = oldStreak + 1;
+                let newStreak;
+                if (isStreakBroken(lastLogin, newLogin)) {
+                    newStreak = 1;
+                } else {
+                    newStreak = oldStreak + 1;
+                }
                 const oldBalance = user.balance;
                 const newBalance = oldBalance + 250 + (50 * newStreak);
                 console.log(`\t${newState.member.displayName} just earned ${newBalance - oldBalance} with a streak of ${newStreak}!`)
