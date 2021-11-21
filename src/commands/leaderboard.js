@@ -8,18 +8,20 @@ module.exports = {
         .setDescription('See who has the biggest BepCoin stack!'),
 
     async execute(interaction) {
-        // const topUsersRaw = await User.findAll({ order: [['balance', 'DESC']], limit: 3 });
-        // const topUsers = topUsersRaw.map(async (u) => {
-        //     const username = await interaction.client.users.fetch(u.userId);
-        //     const stack = u.balance;
-        //     return [username, stack];
-        // });
+        const topUsersRaw = await User.findAll({ order: [['balance', 'DESC']], limit: 5 });
+        
+        const topUsers = [];
+        for (let i = 0; i < topUsersRaw.length; i++) {
+            const user = await interaction.guild.members.fetch(topUsersRaw[i].userId);
+            const name = user.nickname || user.username;
+            const stack = topUsersRaw[i].balance;
+            topUsers.push([name, stack]);
+        }
 
-        // let response = '**BepCoin Leaderboard**';
-        // for (let i = 0; i < topUsers.length; i++) {
-        //     response += `\n${topUsers[i][0]} - ${topUsers[i][1]}`;
-        // }
-        // await interaction.reply(response);
-        await interaction.reply({content: 'Currently unimplemented, sorry', ephemeral: true});
+        let response = '~ BepCoin Leaderboard ~';
+        for (let i = 0; i < topUsers.length; i++) {
+            response += `\n${i+1}: **${topUsers[i][0]}** - ${topUsers[i][1]} :coin:`;
+        }
+        await interaction.reply({content: response, ephemeral: true});
     },
 };
