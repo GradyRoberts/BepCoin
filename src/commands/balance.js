@@ -14,7 +14,7 @@ module.exports = {
             attributes: ['balance', 'loginStreak']
         });
         await interaction.reply({
-            content: `${uname}, your current BepCoin balance is **${user.balance}** :coin: and you have a login streak of **${user.loginStreak} days**!\n\n*You can earn \`250 + 50*streak\` coins per day by joining voice call*`,
+            content: `${uname}, your current BepCoin balance is **${user.balance}** :coin: and you have a login streak of **${user.loginStreak} days**!\n\n*You can earn \`250 + 50 \* streak\` coins per day by joining voice call*`,
             ephemeral: true
         });
     },
