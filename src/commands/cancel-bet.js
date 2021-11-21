@@ -12,6 +12,7 @@ module.exports = {
                 .setRequired(true)),
 
     async execute(interaction) {
+        const uid = interaction.user.id;
         const propId = interaction.options.getString('bet_id');
 
         const prop = await Prop.findByPk(propId);
