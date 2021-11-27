@@ -25,7 +25,7 @@ module.exports = {
         const uname = interaction.user.username;
         const propId = interaction.options.getString('bet_id');
         const choice = interaction.options.getNumber('choice');
-        const amount = interaction.options.getNumber('amount');
+        let amount = interaction.options.getNumber('amount');
 
         const prop = await Prop.findByPk(propId);
         if (!prop) {
